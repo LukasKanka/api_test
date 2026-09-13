@@ -1,0 +1,43 @@
+info:
+  name: ShortingHat
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost:3000/sortingHat
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const status = res.getStatus()
+        const body = res.getBody()
+
+        test("Status code is 200", function() {
+          expect(status).to.equal(200);
+                });
+
+                test("Response should contain sortingHat key", function(){
+                  expect(body).to.contain.key("sortingHatSays")
+                })
+
+                test("Message from sorting hat should not be empty", function(){
+                  expect(res.getBody().sortingHatSays).not.to.be.empty
+                })
+
+                test("Message from house should not be empty", function(){
+                  expect(res.getBody().house).not.to.be.empty
+                })
+
+                test("House is one of Gryffindor, Slytherin, Ravenclaw, Hufflepuff",function(){
+                  expect(res.getBody().house).is.oneOf(["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff" ])
+                })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,39 @@
+name: Run Bruno API Tests
+
+# Pipeline se spustí při každém pushnutí nebo Pull Requestu do hlavní větve
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Krok: Stáhne kód z repozitáře do virtuálního prostředí runneru
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # 2. Krok: Připraví prostředí Node.js (verze 20)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Krok: Nainstaluje závislosti v backendu a spustí ho na pozadí (&)
+      - name: Install dependencies and start Backend
+        run: |
+          cd web/backend
+          npm install
+          npm start &
+
+      # 4. Krok: Vyčká, až server naběhne a bude odpovídat na portu (upravte port podle potřeby, např. 3000)
+      - name: Wait for Backend server to be ready
+        run: npx wait-on http://localhost:3000
+
+      # 5. Krok: Spustí Bruno testy
+      # Pokud nepoužíváte environments, odeberte `--env název_prostředí`
+      - name: Run Bruno API Tests
+        run: npx @usebruno/cli run apiTest --recursive
