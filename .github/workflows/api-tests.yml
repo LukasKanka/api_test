@@ -12,22 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Krok: Stáhne kód z repozitáře do virtuálního prostředí runneru
-      - name: Checkout repository code
-        uses: actions/checkout@v4
-
-      # 2. Nastavení správné verze Node.js (18 místo 20)
+     # 1. Nastavíme Node 20 (aby nehlásily chybu novější balíčky v CI)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      # 3. Spuštění serveru přímo přes node (přeskakujeme nodemon)
+      # 2. Spuštění serveru na pozadí
       - name: Install dependencies and start Backend
         run: |
           cd web/backend
           npm install
           node app.js &
+
+      # 3. Vyčkání přímo na IPv4 adresy (127.0.0.1 místo localhost)
+      - name: Wait for Backend server to be ready
+        run: npx wait-on http://127.0.0.1:3000 -t 30000
 
       # 4. Vyčkání na port s časovým limitem (30 sekund)
       - name: Wait for Backend server to be ready
