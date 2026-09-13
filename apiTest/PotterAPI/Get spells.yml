@@ -1,0 +1,41 @@
+info:
+  name: Get spells
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: http://localhost:3000/spells?type=Curse&limit=2
+  params:
+    - name: type
+      value: Curse
+      type: query
+    - name: limit
+      value: "2"
+      type: query
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const body = res.getBody()
+
+        // Ověřím že se mi vrací Curse z (Query Params)
+        test("Each spell should have type Curse", function(){
+            body.forEach(spellMember => expect(spellMember.type).to.eql("Curse"))
+        });
+
+
+
+        // Ověřím že se mi vrací pouze 2 záznamy (limit)
+        test("Response should contain exactly 2 spells", function(){
+            expect(body).has.length(2)                              
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

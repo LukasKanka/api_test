@@ -24,16 +24,21 @@ runtime:
                 })
 
                 test("Message from sorting hat should not be empty", function(){
-                  expect(res.getBody().sortingHatSays).not.to.be.empty
+                  expect(body.sortingHatSays).not.to.be.empty
                 })
 
                 test("Message from house should not be empty", function(){
-                  expect(res.getBody().house).not.to.be.empty
+                  expect(body.house).not.to.be.empty
                 })
 
                 test("House is one of Gryffindor, Slytherin, Ravenclaw, Hufflepuff",function(){
-                  expect(res.getBody().house).is.oneOf(["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff" ])
+                  expect(body.house).is.oneOf(["Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff" ])        
                 })
+
+        // Ověřím odpověď do 550 ms 
+        test("Response time is less than 550 ms", function(){
+            expect(res.responseTime).to.be.below(550)
+        })
 
 settings:
   encodeUrl: true
