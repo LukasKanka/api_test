@@ -16,22 +16,22 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      # 2. Krok: Připraví prostředí Node.js (verze 20)
+      # 2. Nastavení správné verze Node.js (18 místo 20)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      # 3. Krok: Nainstaluje závislosti v backendu a spustí ho na pozadí (&)
+      # 3. Spuštění serveru přímo přes node (přeskakujeme nodemon)
       - name: Install dependencies and start Backend
         run: |
           cd web/backend
           npm install
-          npm start &
+          node app.js &
 
-      # 4. Krok: Vyčká, až server naběhne a bude odpovídat na portu (upravte port podle potřeby, např. 3000)
+      # 4. Vyčkání na port s časovým limitem (30 sekund)
       - name: Wait for Backend server to be ready
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:3000 -t 30000
 
       # 5. Krok: Spustí Bruno testy
       # Pokud nepoužíváte environments, odeberte `--env název_prostředí`
