@@ -41,4 +41,6 @@ jobs:
 
       # 5. Krok: Spustí Bruno testy
       - name: Run Bruno API Tests
-        run: npx @usebruno/cli run apiTest -r
+        run: |
+          cd apiTest/PotterAPI
+          npx @usebruno/cli run -r
