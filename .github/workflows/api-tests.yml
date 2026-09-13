@@ -1,5 +1,6 @@
 name: Run Bruno API Tests
 
+# Pipeline se spustí při každém pushnutí nebo Pull Requestu do hlavní větvě
 on:
   push:
     branches: [ "main", "master" ]
@@ -11,27 +12,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # KRITICKÝ KROK: Stáhne váš kód z GitHubu do runneru
+      # 1. Krok: Stáhne kód z repozitáře do runneru
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      # Nastavení Node.js
+      # 2. Krok: Připraví prostředí Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # Přechod do složky, instalace a spuštění na pozadí
-      - name: Install dependencies and start Backend
+      # 3. Krok: Vytvoří .env, nainstaluje závislosti a spustí backend na pozadí s logováním
+      - name: Create .env, Install dependencies and start Backend
         run: |
           cd web/backend
+          
+          # Vytvoření testovacího .env souboru pro CI/CD (přidejte další proměnné, pokud je backend vyžaduje)
+          echo "PORT=3000" > .env
+          
           npm install
-          node app.js &
+          
+          # Spuštění aplikace přes node (přesměruje logy i chyby do souboru server.log)
+          node app.js > server.log 2>&1 &
 
-      # Vyčkání na naběhnutí serveru na IPv4 (127.0.0.1)
+      # 4. Krok: Vyčká na naběhnutí serveru na IPv4 (127.0.0.1). Pokud nenaběhne, vypíše logy serveru.
       - name: Wait for Backend server to be ready
-        run: npx wait-on http://127.0.0.1:3000 -t 30000
+        run: |
+          npx wait-on http://127.0.0.1:3000 -t 15000 || (echo "=== LOGY SERVERU (PŘÍČINA CHYBY) ===" && cat web/backend/server.log && exit 1)
 
-      # Spuštění Bruno testů
+      # 5. Krok: Spustí Bruno testy
       - name: Run Bruno API Tests
         run: npx @usebruno/cli run apiTest --recursive
