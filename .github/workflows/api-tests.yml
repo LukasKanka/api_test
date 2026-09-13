@@ -22,23 +22,22 @@ jobs:
         with:
           node-version: 20
 
-      # 3. Krok: Vytvoří .env, nainstaluje závislosti a spustí backend na pozadí s logováním
+      # 3. Krok: Spuštění backendu
       - name: Create .env, Install dependencies and start Backend
         run: |
           cd web/backend
-          
-          # Vytvoření testovacího .env souboru pro CI/CD (přidejte další proměnné, pokud je backend vyžaduje)
           echo "PORT=3000" > .env
-          
           npm install
-          
-          # Spuštění aplikace přes node (přesměruje logy i chyby do souboru server.log)
           node app.js > server.log 2>&1 &
 
-      # 4. Krok: Vyčká na naběhnutí serveru na IPv4 (127.0.0.1). Pokud nenaběhne, vypíše logy serveru.
+      # 4. Krok: Vyčkání na server pomocí obyčejné smyčky s curl
       - name: Wait for Backend server to be ready
         run: |
-          npx wait-on http://127.0.0.1:3000 -t 15000 || (echo "=== LOGY SERVERU (PŘÍČINA CHYBY) ===" && cat web/backend/server.log && exit 1)
+          echo "Čekám na naběhnutí serveru..."
+          until curl -s http://127.0.0.1:3000 > /dev/null; do
+            sleep 1
+          done
+          echo "Server běží a odpovídá!"
 
       # 5. Krok: Spustí Bruno testy
       - name: Run Bruno API Tests
