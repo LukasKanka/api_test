@@ -1,0 +1,9 @@
+# Ignorování složky node_modules v celém projektu (i v podsloužkách jako apiTest)
+node_modules/
+
+# Ignorování vygenerovaných HTML a JSON reportů z testů
+*.html
+*.json
+!bruno.json
+!package.json
+!package-lock.json
