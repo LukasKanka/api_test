@@ -1,6 +1,11 @@
+const fs = require('fs');
+const path = require('path');
+const spellsFilePath = path.join(__dirname, '../spells.json');
+
 var spells = require('../spells.json');
 const joi = require('joi');
-const initialSpells = require('../spells.json');
+const initialSpells = JSON.parse(JSON.stringify(require('../spells.json')));
+
 const schema = joi.object().keys({
     spell: joi.string().min(3).max(30).required().regex(/^\w+(?:\s+\w+)*$/),
     type: joi.string().valid('Charm', 'Enchantment', 'Curse', 'Spell', 'Hex', 'Jinx'),
@@ -10,6 +15,10 @@ const schema = joi.object().keys({
 });
 
 const randomId = require('random-id');
+
+function saveSpellsToFile() {
+    fs.writeFileSync(spellsFilePath, JSON.stringify(spells, null, 2));
+}
 
 exports.spells_list = function (req, res) {
     let result = spells;
@@ -29,11 +38,13 @@ exports.spells_list = function (req, res) {
 }
 exports.delete_all = function (req, res) {
     spells = [];
+    saveSpellsToFile();
     res.send({ message: 'Mischief managed' })
 }
 
 exports.reset = function (req, res) {
-    spells = initialSpells.slice(0);
+    spells = JSON.parse(JSON.stringify(initialSpells));
+    saveSpellsToFile();
     res.send({ message: 'Aparecium', spells: spells })
 }
 exports.specific_spell = function (req, res) {
@@ -50,6 +61,7 @@ exports.delete_spell = function (req, res) {
         return res.status(404).send({ message: "Spell not found" });
     }
     spells = spells.filter(spell => spell.id != req.params.spellId);
+    saveSpellsToFile();
     return res.send({
         message: 'spell deleted'
     });
@@ -81,12 +93,21 @@ exports.update_spell = function (req, res) {
         })
     }
 
+    const formattedSpell = {
+        id: value.id,
+        spell: value.spell,
+        type: value.type,
+        effect: value.effect,
+        isUnforgivable: value.isUnforgivable
+    };
+
     spells = spells.filter(spell => spell.id != req.params.spellId);
-    spells.push(newSpell);
+    spells.push(formattedSpell);
+    saveSpellsToFile();
     return res.status(201).json({
         message: "Spell updated",
         spell: {
-            id: newSpell.id
+            id: formattedSpell.id
         }
     });
 }
@@ -96,11 +117,11 @@ exports.new_spell = function (req, res) {
     var pattern = 'aA0'
 
     var newSpell = {
+        id: randomId(len, pattern),
         spell: req.body.spell,
         type: req.body.type,
         effect: req.body.effect,
-        isUnforgivable: req.body.isUnforgivable,
-        id: randomId(len, pattern)
+        isUnforgivable: req.body.isUnforgivable
     }
 
     let result = spells.find((spell) => spell.spell === newSpell.spell);
@@ -121,11 +142,20 @@ exports.new_spell = function (req, res) {
         })
     }
 
-    spells.push(newSpell);
+    const formattedSpell = {
+        id: value.id,
+        spell: value.spell,
+        type: value.type,
+        effect: value.effect,
+        isUnforgivable: value.isUnforgivable
+    };
+
+    spells.push(formattedSpell);
+    saveSpellsToFile();
     return res.status(201).json({
         message: "Spell created",
         spell: {
-            id: newSpell.id
+            id: formattedSpell.id
         }
     });
 }
