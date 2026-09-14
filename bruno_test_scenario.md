@@ -2,6 +2,28 @@
 
 Tento dokument obsahuje přehled testovacích scénářů, tipů, triků a automatizovaných testů v aplikaci **Bruno** pro testování REST API **PotterAPI**.
 
+### 📋 Stručné shrnutí toho, co v dokumentu najdete:
+
+  1. Nastavení prostředí (Environment v Bruno):
+      • Nastavení proměnných baseUrl (http://localhost:3000), username ( ), password ( ).
+  2. Testovací scénáře pro všechny API služby:
+
+      • 🪄 Kouzla (/spells): Pozitivní testy (seznam, detail, nový záznam, úprava, smazání) a negativní testy (duplicity, chybějící Content-Type: application/json hlavička, 422 Joi
+      validace, 404).
+      
+      • 🧙 Postavy (/characters): Testy s Basic Auth, filtrování podle koleje/role, přidávání, úprava a mazání postav, chybové stavy pro 401 Unauthorized a duplicity.
+      
+      • 🏰 Koleje, Klobouk a Citáty (/houses, /sortingHat, /quote): Testy pro získání kolejí a citátů.
+  3. Asertace a Automatizace (Tests & Scripts):
+      
+      • Příklady JavaScript testů pro záložku Tests v Bruno (kontrola stavových kódů 200, 201, 400, 401, 422, kontrola JSON struktury).
+      
+      • Skript pro záložku Post Response v Bruno pro automatické uložení vygenerovaného ID z odpovídajícího POST požadavku do proměnné prostředí (bru.setEnvVar("createdSpellId", body.
+      spell.id)).
+
+  4. Workflow & Řetězení testů (Chaining):
+     
+      • Postup, jak nastavit kompletní CRUD cyklus: POST ➡️ GET detail ➡️ PUT ➡️ DELETE ➡️ GET 404.
 ---
 
 ## ⚙️ 1. Nastavení Bruno (Environment & Kolekce)
@@ -12,7 +34,7 @@ V aplikaci Bruno si vytvořte nové prostředí (např. `Local`) s následujíc�
 | Název proměnné | Hodnota | Popis |
 | :--- | :--- | :--- |
 | `baseUrl` | `http://localhost:3000` | Základní URL lokálního serveru |
-| `username` | `****` | Přihlašovací jméno pro Basic Auth |
+| `username` | `*****` | Přihlašovací jméno pro Basic Auth |
 | `password` | `*****` | Heslo pro Basic Auth |
 | `createdSpellId` | *(dynamicky)* | Ukládá ID nově vytvořeného kouzla |
 | `createdCharacterId` | *(dynamicky)* | Ukládá ID nově vytvořené postavy |
@@ -26,7 +48,7 @@ V aplikaci Bruno si vytvořte nové prostředí (např. `Local`) s následujíc�
 
 Aplikace používá dva druhy autentizace:
 
-1. **Basic Auth (`****` / `*****`)**:
+1. **Basic Auth (`*****` / `*****`)**:
    - Vyžadováno pro **`/characters`** a **`/login`**.
    - **Nastavení v Bruno**: Na záložce **Auth** zvolte `Basic Auth` a zadejte `Username: {{username}}` a `Password: {{password}}`.
 
@@ -244,3 +266,5 @@ flowchart LR
    - Bruno ukládá kolekce jako čisté `.bru` soubory přímo ve vaší složce projektu. Můžete je verzovat v Gitu spolu s kódem backendu!
 3. **Reset databáze před testy**:
    - Na začátku testovací sady doporučujeme zavolat `GET {{baseUrl}}/spells/actions/reset`, aby byl stav `spells.json` vždy předvídatelný.
+4. **Záloha dat**:
+   - Zálohuj si veškerá data před testováním i po testování dle potřeby ať o ně nepříjdeš.   
