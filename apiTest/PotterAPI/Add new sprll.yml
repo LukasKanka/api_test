@@ -5,17 +5,23 @@ info:
 
 http:
   method: POST
-  url: http://localhost:3000/spells
+  url: http://localhost:3000/characters
   body:
     type: json
-    data: |-
+    data: |
       {
-        "spell":"Fire speed",
-        "effect":"fire speed forever",
-        "type":"Curse",
-        "isUnforgivable":"false"
-      }
-  auth: inherit
+            "name": "Lu Kankys",
+            "role": "student",
+            "house": "Gryffindor",
+            "school": "Hogwarts School of Witchcraft and Wizardry",
+            "dumbledoresArmy": true,
+            "bloodStatus": "half-blood",
+            "species": "human"
+          }
+  auth:
+    type: basic
+    username: admin
+    password: supersecret
 
 settings:
   encodeUrl: true

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-var characters = require('../characters.json');
+const charactersController = require('../controllers/charactersController.js');
 var basicAuth = require('express-basic-auth');
 
 router.use(basicAuth({
@@ -8,17 +8,14 @@ router.use(basicAuth({
     unauthorizedResponse: {
         message: "Sorry Wizard, can't let you in."
     }
+}));
 
-}))
-
-router.get('/',
-    function (req, res) {
-        res.json(characters);
-    });
-
-router.get('/:characterId', function (req, res) {
-    let result = characters.find(character => character.id == req.params.characterId);
-    res.send(result);
-});
+router.get('/', charactersController.characters_list);
+router.post('/', charactersController.new_character);
+router.delete('/actions/deleteAll', charactersController.delete_all);
+router.get('/actions/reset', charactersController.reset);
+router.get('/:characterId', charactersController.specific_character);
+router.delete('/:characterId', charactersController.delete_character);
+router.put('/:characterId', charactersController.update_character);
 
 module.exports = router;

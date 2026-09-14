@@ -2390,5 +2390,18 @@
         "deathEater": false,
         "bloodStatus": "unknown",
         "species": "house-elf"
+    },
+    {
+        "id": "51mzpz80m6x5u1zb8kogw4xn",
+        "name": "Lu Kankys",
+        "role": "student",
+        "house": "Gryffindor",
+        "school": "Hogwarts School of Witchcraft and Wizardry",
+        "dumbledoresArmy": true,
+        "bloodStatus": "half-blood",
+        "species": "human",
+        "ministryOfMagic": false,
+        "orderOfThePhoenix": false,
+        "deathEater": false
     }
 ]
