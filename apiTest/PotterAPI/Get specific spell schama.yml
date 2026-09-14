@@ -1,0 +1,45 @@
+info:
+  name: Get specific spell schama
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: http://localhost:3000/spells/5b74ed6d3228320021ab622f
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const schema = {
+            "type": "object",
+            "required": ["id", "spell", "type", "effect", "isUnforgivable"],
+            "properties": {
+                "id":{
+                    "type": "string",
+                    "minLength": 20, // id musí být minimálně 20 znaků dlouhý
+                },
+                "isUnforgivable":{
+                    "type": "boolean",
+                },
+                "type":{
+                    "enum":["Spell","Charm", "Curse", "Enchantment", "Jinx", "Hex"]
+                }, // kontroluje zda-li je typ jedním z povolených (enum) typů
+                "spell":{
+                    "pattern": "^[A-Z].+" // musí začínat velkým písmenem
+                }
+            }
+        }
+
+        // Otestuji zda-li se odpověď shoduje s očekávaným schématem    
+        test("Response should match schema", function(){
+            expect(res.getBody()).to.have.jsonSchema(schema)
+        })
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
