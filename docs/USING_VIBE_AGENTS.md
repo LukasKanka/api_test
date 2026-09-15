@@ -1,6 +1,6 @@
 # 🤖 Využití Vibe agentů v tomto monorepu
 
-Tento návod vysvětluje, jak **používat Vibe agenty** pro efektivnější práci s tímto monorepo. Agenti jsou navrženi tak, aby vám pomohli s vývojem, testováním a výukou API.
+Tento návod vysvětluje, jak **používat Vibe agenty** pro efektivnější práci s tímto monorepo. Agenti jsou navrženi tak, aby vám pomohli s vývojem, testováním a výukou API. [Mistral Vibe Code](https://mistral.ai/products/vibe/code/)
 
 ---
 

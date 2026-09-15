@@ -132,7 +132,7 @@ api_test/
 
 ---
 
-## 🤖 Vibe Agenti *(plánováno)*
+## 🤖 Vibe Agenti
 
 | Agent | Účel | Vyvolání |
 |-------|-------|----------|
@@ -187,6 +187,7 @@ Soubor: [`.github/workflows/api-tests.yml`](./.github/workflows/api-tests.yml)
 
 ## 📄 Dokumentace
 
+- [🤖 Využití Vibe agentů v tomto monorepu](./docs/USING_VIBE_AGENTS.md) - Popis jak vám Vibe agenti mohou pomoci. [Mistral Vibe Code](https://mistral.ai/products/vibe/code/) nabízí po registraci velmi vstřícný free tarif s podporou vibe-cli nebo plán PRO za cca 450kč či nákup samotných tokenů.
 - [PotterAPI – Testovací scénáře](./backends/potter-api/bruno_test_scenario.md) – Detailní průvodce testováním PotterAPI
 - [Průvodce vytvářením kolekcí](./docs/COLECTION_GUIDE.md) – Jak přidat novou testovací kolekci
 - [Architektura monorepa](./docs/) – Další dokumentace
