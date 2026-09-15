@@ -6,6 +6,17 @@ Tento projekt slouží jako **playground** pro vývoj, testování a výuku API 
 
 ---
 
+## ⚠️ Důležité informace
+
+> **🔒 Toto repozitář má jediného vlastníka (maintainera):** @LukasKanka
+
+- **Testy v `main`/`master` větvi** jsou pouze **ukázkové** a slouží pro demonstraci funkčnosti
+- **Repo je určeno pro lokální použití** – klonujte si ho, experimentujte, učte se
+- **Pokud chcete přispět:** Postupujte podle [sekce Přispívání](#🤝-přispívání) – **nepushujte přímo do `main`/`master`**
+- **Fork a vlastní větev:** Pokud chcete experimentovat bez přispívání, vytvořte si **fork** a pracujte ve své vlastní větvi
+
+---
+
 ## 🗺️ Rozcestník
 
 | Služba | Backend | Frontend | Testy | Dokumentace |
