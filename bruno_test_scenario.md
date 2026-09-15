@@ -4,9 +4,12 @@ Tento dokument obsahuje přehled testovacích scénářů, tipů, triků a autom
 
 ### 📋 Stručné shrnutí toho, co v dokumentu najdete:
 
-  1. Nastavení prostředí (Environment v Bruno):
+  1. Spouštění aplikace (Backend & Frontend):
+      • Spuštění backend serveru na portu 3000.
+      • Spuštění frontend aplikace.
+  2. Nastavení prostředí (Environment v Bruno):
       • Nastavení proměnných baseUrl (http://localhost:3000), username ( ), password ( ).
-  2. Testovací scénáře pro všechny API služby:
+  3. Testovací scénáře pro všechny API služby:
 
       • 🪄 Kouzla (/spells): Pozitivní testy (seznam, detail, nový záznam, úprava, smazání) a negativní testy (duplicity, chybějící Content-Type: application/json hlavička, 422 Joi
       validace, 404).
@@ -24,6 +27,52 @@ Tento dokument obsahuje přehled testovacích scénářů, tipů, triků a autom
   4. Workflow & Řetězení testů (Chaining):
      
       • Postup, jak nastavit kompletní CRUD cyklus: POST ➡️ GET detail ➡️ PUT ➡️ DELETE ➡️ GET 404.
+---
+
+## 🚀 Spouštění aplikace
+
+Před spuštěním testů je nutné spustit backend server a případně i frontend aplikaci.
+
+### Backend (API Server)
+
+Backend je Express.js aplikace běžící na portu **3000**.
+
+**Spuštění z kořenové složky projektu:**
+```bash
+cd web/backend
+npm install   # Nainstaluje závislosti (pokud ještě nejsou nainstalovány)
+npm start    # Spustí server pomocí nodemon (automaticky restartuje při změnách)
+```
+
+**Přímé spuštění bez nodemon:**
+```bash
+cd web/backend
+node app.js
+```
+
+Server bude dostupný na `http://localhost:3000`.
+
+> [!TIP]
+> Pokud je port 3000 obsazen, je nutné jej uvolnit nebo změnit port přímo v souboru `web/backend/app.js` (řádek 9: `const port = 3000`).
+
+### Frontend (Vue.js Aplikace)
+
+Frontend je Vue.js aplikace, kterou lze spustit pro vývojové účely.
+
+**Spuštění z kořenové složky projektu:**
+```bash
+cd web/frontend
+npm install   # Nainstaluje závislosti (pokud ještě nejsou nainstalovány)
+npm run serve # Spustí vývojový server (obvykle na portu 8080)
+# nebo
+npm start     # Stejné jako npm run serve
+```
+
+Frontend bude dostupný na `http://localhost:8080`.
+
+> [!NOTE]
+> Pro samotné testování API pomocí Bruno není spuštění frontend nutné. Stačí mít běžící backend server.
+
 ---
 
 ## ⚙️ 1. Nastavení Bruno (Environment & Kolekce)
