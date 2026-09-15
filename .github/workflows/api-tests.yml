@@ -61,13 +61,15 @@ jobs:
             echo "Spouštím testy pro: $dir"
             echo "=========================================="
             
-            # Spust testy a zachyt výsledek
-            if npx @usebruno/cli run "${dir#apiTest/}" -r; then
+            # Přepnout do složky kolekce a spustit testy
+            cd "$dir"
+            if npx @usebruno/cli run -r; then
               echo "✅ Testy pro $(basename $dir) prošly"
             else
               echo "❌ Testy pro $(basename $dir) selhaly"
               ALL_PASSED=false
             fi
+            cd ../..
           done
           
           echo "=========================================="
