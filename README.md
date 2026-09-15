@@ -182,7 +182,7 @@ Soubor: [`.github/workflows/api-tests.yml`](./.github/workflows/api-tests.yml)
 
 ---
 
-## 📞 Kontakt & Podpora
+## 📞 Podpora
 
 - **Issues**: [GitHub Issues](https://github.com/kankys/api_test/issues)
 - **Diskuse**: Použijte GitHub Discussions

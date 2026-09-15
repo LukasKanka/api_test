@@ -1,0 +1,43 @@
+info:
+  name: Get all users
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: https://jsonplaceholder.typicode.com/users
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const status = res.getStatus();
+        const body = res.getBody();
+
+        test("Status code is 200", function() {
+          expect(status).to.equal(200);
+        });
+
+        test("Response is an array", function() {
+          expect(body).to.be.an('array');
+        });
+
+        test("Array has 10 users", function() {
+          expect(body).to.have.length(10);
+        });
+
+        test("Each user has id and name", function() {
+          body.forEach(user => {
+            expect(user).to.have.property('id');
+            expect(user).to.have.property('name');
+            expect(user).to.have.property('email');
+          });
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 10000
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true

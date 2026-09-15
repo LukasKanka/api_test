@@ -1,0 +1,44 @@
+info:
+  name: Create new post
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://jsonplaceholder.typicode.com/posts
+  auth: inherit
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    raw: |-
+      {
+        "title": "foo",
+        "body": "bar",
+        "userId": 1
+      }
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        const status = res.getStatus();
+        const responseBody = res.getBody();
+
+        test("Status code is 201", function() {
+          expect(status).to.equal(201);
+        });
+
+        test("Response has id", function() {
+          expect(responseBody).to.have.property('id');
+        });
+
+        test("Response id is a number", function() {
+          expect(responseBody.id).to.be.a('number');
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 10000
+  followRedirects: true
+  maxRedirects: 5
