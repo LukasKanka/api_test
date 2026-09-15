@@ -8,7 +8,7 @@ Tento dokument obsahuje přehled testovacích scénářů, tipů, triků a autom
       • Spuštění backend serveru na portu 3000.
       • Spuštění frontend aplikace.
   2. Nastavení prostředí (Environment v Bruno):
-      • Nastavení proměnných baseUrl (http://localhost:3000), username ( ), password ( ).
+      • Nastavení proměnných baseUrl (http://localhost:3000), username ( `admin` ), password ( `supersecret` ).
   3. Testovací scénáře pro všechny API služby:
 
       • 🪄 Kouzla (/spells): Pozitivní testy (seznam, detail, nový záznam, úprava, smazání) a negativní testy (duplicity, chybějící Content-Type: application/json hlavička, 422 Joi
@@ -83,8 +83,8 @@ V aplikaci Bruno si vytvořte nové prostředí (např. `Local`) s následujíc�
 | Název proměnné | Hodnota | Popis |
 | :--- | :--- | :--- |
 | `baseUrl` | `http://localhost:3000` | Základní URL lokálního serveru |
-| `username` | `*****` | Přihlašovací jméno pro Basic Auth |
-| `password` | `*****` | Heslo pro Basic Auth |
+| `username` | `admin` | Přihlašovací jméno pro Basic Auth |
+| `password` | `supersecret` | Heslo pro Basic Auth |
 | `createdSpellId` | *(dynamicky)* | Ukládá ID nově vytvořeného kouzla |
 | `createdCharacterId` | *(dynamicky)* | Ukládá ID nově vytvořené postavy |
 
@@ -97,7 +97,7 @@ V aplikaci Bruno si vytvořte nové prostředí (např. `Local`) s následujíc�
 
 Aplikace používá dva druhy autentizace:
 
-1. **Basic Auth (`*****` / `*****`)**:
+1. **Basic Auth (`admin` / `supersecret`)**:
    - Vyžadováno pro **`/characters`** a **`/login`**.
    - **Nastavení v Bruno**: Na záložce **Auth** zvolte `Basic Auth` a zadejte `Username: {{username}}` a `Password: {{password}}`.
 

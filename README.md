@@ -244,3 +244,10 @@ Chcete přispět do tohoto monorepa? Dodržujte následující postup:
 | **Bruno** | API testování |
 | **npm Workspaces** | Správa monorepa |
 | **GitHub Actions** | CI/CD |
+
+---
+
+## ⚖️ Licence a autorská práva
+
+- **Zdrojový kód:** Tento projekt staví na open-source základech. Původní licence zachováváme v příslušných složkách.
+- **Obsah a ochranné známky:** Veškerá práva k tématice, postavám a názvům ze světa Harryho Pottera patří J. K. Rowling a Warner Bros. Projekt slouží výhradně pro nekomerční vzdělávací účely.
