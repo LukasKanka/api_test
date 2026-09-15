@@ -184,11 +184,35 @@ Soubor: [`.github/workflows/api-tests.yml`](./.github/workflows/api-tests.yml)
 
 ## 🤝 Přispívání
 
+Chcete přispět do tohoto monorepa? Dodržujte následující postup:
+
+### 📌 Zásady
+- **❌ Zakázáno:** Přímý push do `main` nebo `master` větve
+- **✅ Povoleno:** Vytváření nových větví a Pull Requestů
+
+### 🚀 Postup
 1. Forkněte repozitář
-2. Vytvořte feature branch (`git checkout -b feature/nova-funkce`)
-3. Commitněte změny (`git commit -m 'Přidána nová funkce'`)
-4. Pushněte na větev (`git push origin feature/nova-funkce`)
-5. Vytvořte Pull Request
+2. Vytvořte novou větev pro svou změnu:
+   ```bash
+   git checkout -b feature/nova-funkce
+   # nebo
+   git checkout -b fix/oprava-chyby
+   ```
+3. Proveďte své změny a commitněte je:
+   ```bash
+   git commit -m 'Přidána nová funkce'
+   ```
+4. Pushněte změny na svou větev:
+   ```bash
+   git push origin feature/nova-funkce
+   ```
+5. Vytvořte **Pull Request** z vaší větve do `main`
+6. Počkejte na review a schválení
+
+### 📝 Pokyny pro Pull Request
+- Napište jasný název a popis změny
+- Odkazujte na příslušné issues (pokud existují)
+- Udržujte commit zprávy čisté a popisné
 
 ---
 
