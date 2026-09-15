@@ -15,6 +15,7 @@
     "start:potter-api": "cd backends/potter-api && npm start",
     "start:potter-fe": "cd backends/potter-api/frontend && npm run serve",
     "test:all": "for dir in $(find apiTest -mindepth 1 -maxdepth 1 -type d ! -name \"node_modules\" ! -name \".git\" | sort); do cd \"$dir\" && npx @usebruno/cli run -r && cd ../.. || exit 1; done",
+    "test:all:with-backend": "cd backends/potter-api && npm install 2>/dev/null; PORT=3000 node app.js > /tmp/bruno-server.log 2>&1 & sleep 3 && cd ../.. && npm run test:all && pkill -f \"node app.js\" 2>/dev/null || true",
     "test:potter": "cd apiTest/PotterAPI && npx @usebruno/cli run -r",
     "test:watch": "cd apiTest/PotterAPI && npx @usebruno/cli run -r --watch",
     "lint": "echo \"Linting all workspaces\""

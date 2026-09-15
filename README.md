@@ -11,6 +11,7 @@ Tento projekt slouží jako **playground** pro vývoj, testování a výuku API 
 | Služba | Backend | Frontend | Testy | Dokumentace |
 |--------|---------|----------|-------|--------------|
 | **PotterAPI** | [`backends/potter-api`](./backends/potter-api) | [`backends/potter-api/frontend`](./backends/potter-api/frontend) | [`apiTest/PotterAPI`](./apiTest/PotterAPI) | [bruno_test_scenario.md](./backends/potter-api/bruno_test_scenario.md) |
+| **JsonPlaceholder** | ❌ Veřejné API | ❌ | [`apiTest/JsonPlaceholder`](./apiTest/JsonPlaceholder) | - |
 
 ---
 
@@ -51,8 +52,11 @@ Frontend bude dostupný na **`http://localhost:8080`**.
 ### 4️⃣ Spuštění testů
 
 ```bash
-# Spuštění všech testů
+# Spuštění všech testů (vyžaduje běžící backend pro PotterAPI)
 npm run test:all
+
+# Spuštění všech testů + spuštění backendu (automaticky)
+npm run test:all:with-backend
 
 # Spuštění pouze PotterAPI testů
 npm run test:potter
@@ -60,6 +64,10 @@ npm run test:potter
 # Spuštění testů s watch módem (automatické opakování)
 npm run test:watch
 ```
+
+> ⚠️ **Poznámka:** Testy pro **PotterAPI** vyžadují běžící backend na `localhost:3000`. 
+> Testy pro **JsonPlaceholder** fungují bez backendu (používají veřejné API).
+> Použij `npm run test:all:with-backend` pro automatické spuštění backendu i testů.
 
 ---
 
@@ -169,6 +177,8 @@ Soubor: [`.github/workflows/api-tests.yml`](./.github/workflows/api-tests.yml)
 ## 📄 Dokumentace
 
 - [PotterAPI – Testovací scénáře](./backends/potter-api/bruno_test_scenario.md) – Detailní průvodce testováním PotterAPI
+- [Průvodce vytvářením kolekcí](./docs/COLECTION_GUIDE.md) – Jak přidat novou testovací kolekci
+- [Architektura monorepa](./docs/) – Další dokumentace
 
 ---
 
