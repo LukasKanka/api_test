@@ -22,25 +22,69 @@ jobs:
         with:
           node-version: 20
 
-      # 3. Krok: Spuštění backendu
-      - name: Create .env, Install dependencies and start Backend
+      # 3. Krok: Instalace závislostí v rootu
+      - name: Install root dependencies
         run: |
-          cd web/backend
-          echo "PORT=3000" > .env
           npm install
+
+      # 4. Krok: Spuštění PotterAPI backendu
+      - name: Start PotterAPI Backend
+        run: |
+          cd backends/potter-api
+          npm install
+          echo "PORT=3000" > .env
           node app.js > server.log 2>&1 &
 
-      # 4. Krok: Vyčkání na server pomocí obyčejné smyčky s curl
-      - name: Wait for Backend server to be ready
+      # 5. Krok: Vyčkání na server pomocí obyčejné smyčky s curl
+      - name: Wait for PotterAPI server to be ready
         run: |
-          echo "Čekám na naběhnutí serveru..."
+          echo "Čekám na naběhnutí PotterAPI serveru..."
           until curl -s http://127.0.0.1:3000 > /dev/null; do
             sleep 1
           done
-          echo "Server běží a odpovídá!"
+          echo "PotterAPI server běží a odpovídá!"
 
-      # 5. Krok: Spustí Bruno testy
-      - name: Run Bruno API Tests
+      # 6. Krok: Spustí všechny Bruno testy v apiTest
+      - name: Run all Bruno API Tests
         run: |
-          cd apiTest/PotterAPI
-          npx @usebruno/cli run -r
+          echo "Spouštím všechny testovací kolekce..."
+          
+          # Získat seznam všech složek v apiTest (kromě node_modules)
+          TEST_DIRS=$(find apiTest -mindepth 1 -maxdepth 1 -type d ! -name "node_modules" ! -name ".git" | sort)
+          
+          echo "Nalezené testovací kolekce: ${TEST_DIRS}"
+          
+          # Spustit testy pro každou kolekci
+          ALL_PASSED=true
+          for dir in $TEST_DIRS; do
+            echo "=========================================="
+            echo "Spouštím testy pro: $dir"
+            echo "=========================================="
+            
+            # Spust testy a zachyt výsledek
+            if npx @usebruno/cli run "${dir#apiTest/}" -r; then
+              echo "✅ Testy pro $(basename $dir) prošly"
+            else
+              echo "❌ Testy pro $(basename $dir) selhaly"
+              ALL_PASSED=false
+            fi
+          done
+          
+          echo "=========================================="
+          echo "Výsledek všech testů"
+          echo "=========================================="
+          
+          if [ "$ALL_PASSED" = true ]; then
+            echo "✅ Všechny testy prošly!"
+            exit 0
+          else
+            echo "❌ Některé testy selhaly"
+            exit 1
+          fi
+
+      # 7. Krok: Zobrazení server logů při selhání
+      - name: Show server logs on failure
+        if: failure()
+        run: |
+          echo "Server logs:"
+          cat backends/potter-api/server.log || echo "Log soubor nebyl nalezen"

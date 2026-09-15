@@ -1,0 +1,33 @@
+{
+  "name": "api-test-playground",
+  "version": "1.0.0",
+  "description": "Monorepo for API testing playground with Bruno and Vibe agents",
+  "private": true,
+  "workspaces": [
+    "backends/*",
+    "backends/*/frontend",
+    "apiTest/*"
+  ],
+  "scripts": {
+    "setup": "npm install",
+    "start:all": "concurrently \"npm run start:backends\" \"npm run test:watch\"",
+    "start:backends": "cd backends/potter-api && npm start",
+    "start:potter-api": "cd backends/potter-api && npm start",
+    "start:potter-fe": "cd backends/potter-api/frontend && npm run serve",
+    "test:all": "cd apiTest && npx @usebruno/cli run PotterAPI -r",
+    "test:potter": "cd apiTest/PotterAPI && npx @usebruno/cli run -r",
+    "test:watch": "cd apiTest && npx @usebruno/cli run PotterAPI -r --watch",
+    "lint": "echo \"Linting all workspaces\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "api-testing",
+    "bruno",
+    "monorepo",
+    "potter-api"
+  ],
+  "author": "",
+  "license": "ISC"
+}

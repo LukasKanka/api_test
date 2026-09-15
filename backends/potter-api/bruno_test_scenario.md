@@ -39,21 +39,21 @@ Backend je Express.js aplikace běžící na portu **3000**.
 
 **Spuštění z kořenové složky projektu:**
 ```bash
-cd web/backend
+cd backends/potter-api
 npm install   # Nainstaluje závislosti (pokud ještě nejsou nainstalovány)
 npm start    # Spustí server pomocí nodemon (automaticky restartuje při změnách)
 ```
 
 **Přímé spuštění bez nodemon:**
 ```bash
-cd web/backend
+cd backends/potter-api
 node app.js
 ```
 
 Server bude dostupný na `http://localhost:3000`.
 
 > [!TIP]
-> Pokud je port 3000 obsazen, je nutné jej uvolnit nebo změnit port přímo v souboru `web/backend/app.js` (řádek 9: `const port = 3000`).
+> Pokud je port 3000 obsazen, je nutné jej uvolnit nebo změnit port přímo v souboru `backends/potter-api/app.js` (řádek 9: `const port = 3000`).
 
 ### Frontend (Vue.js Aplikace)
 
@@ -61,7 +61,7 @@ Frontend je Vue.js aplikace, kterou lze spustit pro vývojové účely.
 
 **Spuštění z kořenové složky projektu:**
 ```bash
-cd web/frontend
+cd backends/potter-api/frontend
 npm install   # Nainstaluje závislosti (pokud ještě nejsou nainstalovány)
 npm run serve # Spustí vývojový server (obvykle na portu 8080)
 # nebo
