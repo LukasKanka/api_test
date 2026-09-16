@@ -337,4 +337,24 @@ Pokud agenti neposkytují očekávané odpovědi:
 
 ---
 
+## 🔗 Užitečné odkazy
+
+### Vibe & Mistral AI
+- [Mistral AI](https://mistral.ai/) – Hlavní web společnosti
+- [Mistral AI Dokumentace](https://docs.mistral.ai/) – Oficiální dokumentace
+- [Vibe Code](https://mistral.ai/products/vibe/code) – Stránka produktu Vibe Code
+- [Vibe CLI GitHub](https://github.com/mistralai/vibe) – Repozitář Vibe CLI
+
+### Bruno
+- [Bruno Web](https://www.usebruno.com/) – Hlavní stránka
+- [Bruno Dokumentace](https://www.usebruno.com/docs) – Kompletní dokumentace
+- [Bruno GitHub](https://github.com/usebruno/bruno) – Open-source repozitář
+
+### Testování API
+- [Chai Assertion Library](https://www.chaijs.com/) – Dokumentace testovací knihovny
+- [JSONPlaceholder](https://jsonplaceholder.typicode.com/) – Veřejné API pro testování
+- [OpenWeather API](https://openweathermap.org/api) – Příklad veřejného API
+
+---
+
 *Poslední aktualizace: 15. září 2026*

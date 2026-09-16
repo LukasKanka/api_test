@@ -248,8 +248,17 @@ settings:
 
 ## 📚 Další zdroje
 
-- [Bruno Dokumentace](https://www.usebruno.com/docs)
-- [Chai Assertion Library](https://www.chaijs.com/)
+### Bruno
+- [Bruno Dokumentace](https://www.usebruno.com/docs) – Oficiální dokumentace
+- [Bruno GitHub](https://github.com/usebruno/bruno) – Open-source repozitář
+
+### Testování
+- [Chai Assertion Library](https://www.chaijs.com/) – Dokumentace testovací knihovny
+
+### Vibe & Mistral AI
+- [Mistral AI](https://mistral.ai/) – Hlavní web společnosti
+- [Mistral AI Dokumentace](https://docs.mistral.ai/) – Oficiální dokumentace
+- [Vibe Code](https://mistral.ai/products/vibe/code) – AI asistent pro vývoj
 
 ---
 
