@@ -1,6 +1,36 @@
 # 🤖 Využití Vibe agentů v tomto monorepu
 
-Tento návod vysvětluje, jak **používat Vibe agenty** pro efektivnější práci s tímto monorepo. Agenti jsou navrženi tak, aby vám pomohli s vývojem, testováním a výukou API. [Mistral Vibe Code](https://mistral.ai/products/vibe/code/)
+Tento návod vysvětluje, jak **používat Vibe agenty** pro efektivnější práci s tímto monorepo. Agenti jsou navrženi tak, aby vám pomohli s vývojem, testováním a výukou API.
+
+---
+
+## ⚙️ Instalace a nastavení
+
+### 1. Instalace Vibe CLI
+
+Před použitím agentů se ujistěte, že máte nainstalovaný **Vibe CLI**:
+
+```bash
+# Nainstaluj Vibe CLI globálně
+npm install -g @vibe-cli/vibe
+
+# Nebo použij npx pro jednorázové použití
+npx @vibe-cli/vibe
+```
+
+### 2. Nastavení v tomto repozitáři
+
+Vibe agenti jsou **předkonfigurování** pro použití v tomto monorepu.
+
+```bash
+# Přejdi do kořenové složky repozitáře
+cd /cesta/k/tvemu/api_test
+
+# Nyní můžeš přímo vyvolat agenty
+/api-tester
+```
+
+> **⚠️ Důležité:** Agenti fungují nejlépe, když jsi **v kořenové složce** tohoto repozitáře (`api_test/`). Zde mají přístup ke struktuře repozitáře, konfiguraci a dokumentaci.
 
 ---
 
