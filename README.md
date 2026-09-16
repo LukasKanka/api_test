@@ -130,6 +130,8 @@ api_test/
 ### Vibe CLI
 **AI asistent pro vývoj** – Pomáhá s psaním testů, dokumentací a delegací úkolů.
 
+Mistral Vibe Code nabízí po registraci velmi vstřícný free tarif s podporou vibe-cli, nebo plán PRO za cca 450 Kč/měsíc či možnost nákupu samotných tokenů podle potřeby.
+
 ---
 
 ## 🤖 Vibe Agenti
