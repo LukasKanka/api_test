@@ -4,6 +4,13 @@
 
 Tento projekt slouží jako **playground** pro vývoj, testování a výuku API testování. Obsahuje backendové služby, frontendové aplikace a komplexní testovací kolekce.
 
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT license">
+  <img src="https://img.shields.io/badge/tested-Linux-brightgreen?style=flat-square" alt="Tested on Linux">
+  <img src="https://img.shields.io/badge/platform-Linux%20%7C%20MacOS%20%7C%20FreeBSD-6DA55F?style=flat-square" alt="Platforms"> 
+</p> 
+
+
 ---
 
 ## ⚠️ Důležité informace
